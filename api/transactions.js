@@ -1,6 +1,6 @@
 var _           = require('lodash');
 var async       = require('async');
-var ripple      = require('ripple-lib');
+var ripple      = require('stellar-lib');
 var validator   = require('./../lib/schema-validator');
 var remote      = require('./../lib/remote.js');
 var dbinterface = require('./../lib/db-interface.js');
@@ -18,7 +18,7 @@ module.exports = {
 };
 
 /**
- *  Submit a normal ripple-lib transaction, blocking duplicates
+ *  Submit a normal stellar-lib transaction, blocking duplicates
  *  for payments and orders.
  *
  *  @param {Remote} remote
@@ -512,7 +512,7 @@ function compareTransactions(first, second, earliest_first) {
 };
 
 /**
- *  Wrapper around the standard ripple-lib requestAccountTx function
+ *  Wrapper around the standard stellar-lib requestAccountTx function
  *
  *  @param {Remote} remote
  *  @param {RippleAddress} options.account

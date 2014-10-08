@@ -1,6 +1,6 @@
 var _                   = require('lodash');
 var async               = require('async');
-var ripple              = require('ripple-lib');
+var ripple              = require('stellar-lib');
 var transactions        = require('./transactions');
 var server_lib          = require('../lib/server-lib');
 var remote              = require('./../lib/remote.js');

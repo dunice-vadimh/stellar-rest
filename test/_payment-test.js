@@ -6,7 +6,7 @@ var ws            = require('ws');
 var route         = new (require('events').EventEmitter);
 var fixtures      = require('./fixtures')._payments;
 var testutils     = require('./utils');
-var RL            = require('ripple-lib');
+var RL            = require('stellar-lib');
 var orderlist     = new testutils.orderlist;
 
 /**

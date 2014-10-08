@@ -1,4 +1,4 @@
-var RL = require('ripple-lib')
+var RL = require('stellar-lib')
 var accounts = {}
 var state = {};
 accounts.genesis = {

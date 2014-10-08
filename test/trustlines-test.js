@@ -1,5 +1,5 @@
 var assert = require('assert');
-var ripple = require('ripple-lib');
+var ripple = require('stellar-lib');
 var testutils = require('./testutils');
 var fixtures = require('./fixtures').trustlines;
 var errors = require('./fixtures').errors;
