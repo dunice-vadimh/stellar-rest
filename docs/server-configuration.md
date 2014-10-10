@@ -25,7 +25,7 @@ An example configuration file is provided [here](../config-example.json).
     "key_path": "./certs/server.key",
     "cert_path": "./certs/server.crt"
   },
-  "rippled_servers": [
+  "stellard_servers": [
     {
       "host": "s_west.ripple.com",
       "port": 443,
@@ -42,7 +42,7 @@ An example configuration file is provided [here](../config-example.json).
 + `HOST` - the host the API server will be available on
 + `DATABASE_URL` - the URL used to connect to the PostgreSQL database
 + `ssl` - if an object with `key_path` and `cert_path` are provided, the API server will be available over HTTPS
-+ `rippled_servers` - an array of server objects indicating which `rippled` servers the API should connect to. These should be configured to point to your local `rippled` if you are running one, instead of `s_west.ripple.com`
++ `stellard_servers` - an array of server objects indicating which `rippled` servers the API should connect to. These should be configured to point to your local `rippled` if you are running one, instead of `s_west.ripple.com`
 + `debug` - boolean to log debugging information
 
 ----------
@@ -60,10 +60,10 @@ An example configuration file is provided [here](../config-example.json).
     "key_path": "./certs/server.key",
     "cert_path": "./certs/server.crt"
   },
-  "rippled_servers": [
+  "stellard_servers": [
     {
-      "host": "s_west.ripple.com",
-      "port": 443,
+      "host": "live.stellar.org",
+      "port": 9001,
       "secure": true
     }
   ]
@@ -76,6 +76,6 @@ An example configuration file is provided [here](../config-example.json).
 + `HOST` - the host the API server will be available on
 + `DATABASE_URL` - the URL used to connect to the PostgreSQL database
 + `ssl` - if an object with `key_path` and `cert_path` are provided, the API server will be available over HTTPS
-+ `rippled_servers` - an array of server objects indicating which `rippled` servers the API should connect to. These should be configured to point to your local `rippled` if you are running one, instead of `s_west.ripple.com`
++ `stellard_servers` - an array of server objects indicating which `rippled` servers the API should connect to. These should be configured to point to your local `rippled` if you are running one, instead of `s_west.ripple.com`
 
 ----------

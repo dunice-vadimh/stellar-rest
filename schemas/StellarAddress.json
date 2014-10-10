@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "StellarAddress",
+  "description": "A Stellar account address",
+  "type": "string",
+  "pattern": "^g[1-9A-HJ-NP-Za-km-z]{25,33}$"
+}

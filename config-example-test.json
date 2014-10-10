@@ -3,10 +3,10 @@
   "PORT": 5991,
   "NODE_ENV": "development",
   "HOST": "localhost",
-  "rippled_servers": [
+  "stellard_servers": [
     {
-      "host": "s-west.ripple.com",
-      "port": 443,
+      "host": "live.stellar.org",
+      "port": 9001,
       "secure": true
     }
   ],

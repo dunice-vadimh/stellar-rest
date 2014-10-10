@@ -151,8 +151,8 @@ function getTransactionHelper(request, response, callback) {
   async.waterfall(steps, callback);
 
   function validateOptions(async_callback) {
-    if (options.account && !validator.isValid(options.account, 'RippleAddress')) {
-      return callback(new errors.InvalidRequestError('Invalid parameter: account. Must be a valid Ripple Address'));
+    if (options.account && !validator.isValid(options.account, 'StellarAddress')) {
+      return callback(new errors.InvalidRequestError('Invalid parameter: account. Must be a valid Stellar Address'));
     }
 
     if (!options.identifier) {
@@ -303,13 +303,13 @@ function getAccountTransactions(options, response, callback) {
   function validateOptions(async_callback) {
     if (!options.account) {
       return async_callback(new errors.InvalidRequestError('Missing parameter: account. ' +
-        'Must supply a valid Ripple Address to query account transactions')
+        'Must supply a valid Stellar Address to query account transactions')
       );
     }
 
-    if (!validator.isValid(options.account, 'RippleAddress')) {
+    if (!validator.isValid(options.account, 'StellarAddress')) {
       return async_callback(new errors.InvalidRequestError('Invalid parameter: account. ' +
-        'Must supply a valid Ripple Address to query account transactions')
+        'Must supply a valid Stellar Address to query account transactions')
       );
     }
 

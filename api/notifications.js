@@ -77,7 +77,7 @@ function getNotificationHelper(request, response, callback) {
   var identifier = request.params.identifier
 
   if (!account) {
-    return next(new errors.InvalidRequestError('Missing parameter: account. Must be a valid Ripple Address'));
+    return next(new errors.InvalidRequestError('Missing parameter: account. Must be a valid Stellar Address'));
   }
 
   function getTransaction(async_callback) {
