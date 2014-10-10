@@ -1,6 +1,6 @@
 var _           = require('lodash');
 var async       = require('async');
-var ripple      = require('ripple-lib');
+var ripple      = require('stellar-lib');
 var validator   = require('./../lib/schema-validator');
 var remote      = require('./../lib/remote.js');
 var dbinterface = require('./../lib/db-interface.js');
@@ -18,7 +18,7 @@ module.exports = {
 };
 
 /**
- *  Submit a normal ripple-lib transaction, blocking duplicates
+ *  Submit a normal stellar-lib transaction, blocking duplicates
  *  for payments and orders.
  *
  *  @param {Remote} remote
@@ -151,8 +151,8 @@ function getTransactionHelper(request, response, callback) {
   async.waterfall(steps, callback);
 
   function validateOptions(async_callback) {
-    if (options.account && !validator.isValid(options.account, 'RippleAddress')) {
-      return callback(new errors.InvalidRequestError('Invalid parameter: account. Must be a valid Ripple Address'));
+    if (options.account && !validator.isValid(options.account, 'StellarAddress')) {
+      return callback(new errors.InvalidRequestError('Invalid parameter: account. Must be a valid Stellar Address'));
     }
 
     if (!options.identifier) {
@@ -303,13 +303,13 @@ function getAccountTransactions(options, response, callback) {
   function validateOptions(async_callback) {
     if (!options.account) {
       return async_callback(new errors.InvalidRequestError('Missing parameter: account. ' +
-        'Must supply a valid Ripple Address to query account transactions')
+        'Must supply a valid Stellar Address to query account transactions')
       );
     }
 
-    if (!validator.isValid(options.account, 'RippleAddress')) {
+    if (!validator.isValid(options.account, 'StellarAddress')) {
       return async_callback(new errors.InvalidRequestError('Invalid parameter: account. ' +
-        'Must supply a valid Ripple Address to query account transactions')
+        'Must supply a valid Stellar Address to query account transactions')
       );
     }
 
@@ -512,7 +512,7 @@ function compareTransactions(first, second, earliest_first) {
 };
 
 /**
- *  Wrapper around the standard ripple-lib requestAccountTx function
+ *  Wrapper around the standard stellar-lib requestAccountTx function
  *
  *  @param {Remote} remote
  *  @param {RippleAddress} options.account

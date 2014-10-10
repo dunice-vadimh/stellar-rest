@@ -1,7 +1,7 @@
 {
   "config_version": "2.0.0",
   "debug": false,
-  "port": 5990,
+  "port": 5991,
   "host": "localhost",
   "ssl_enabled": false,
   "ssl": {
@@ -9,7 +9,7 @@
     "cert_path": "./certs/server.crt"
   },
   "db_path": "./ripple-rest.db",
-  "rippled_servers": [
-    "wss://s1.ripple.com:443"
+  "stellard_servers": [
+    "wss://live.stellar.org:9001"
   ]
 }

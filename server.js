@@ -6,7 +6,7 @@ var remote  = require('./lib/remote.js');
 var logger  = require('./lib/logger.js').logger;
 var utils   = require('./lib/utils.js');
 
-var port = config.get('port') || 5990;
+var port = config.get('PORT') || 5991;
 var host = config.get('host');
 
 logger.info('ripple-rest (v' + utils.getPackageVersion() + ')');

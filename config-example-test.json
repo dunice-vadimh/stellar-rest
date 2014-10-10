@@ -1,0 +1,14 @@
+{
+  "config_version": "1.0.1",
+  "PORT": 5991,
+  "NODE_ENV": "development",
+  "HOST": "localhost",
+  "stellard_servers": [
+    {
+      "host": "live.stellar.org",
+      "port": 9001,
+      "secure": true
+    }
+  ],
+  "debug": false
+}
