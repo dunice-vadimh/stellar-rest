@@ -588,7 +588,7 @@ Retrieve information about the `ripple-rest` and connected `rippled`'s current s
 ```js
 {
   "api_server_status": "online",
-  "rippled_server_url": "wss://s_west.ripple.com:443",
+  "rippled_server_url": "wss://live.stellar.org:9001",
   "rippled_server_status": {
     "build_version": "0.21.0-rc2",
     "complete_ledgers": "32570-4805506",
