@@ -1,4 +1,4 @@
-# ripple-rest
+# stellar-rest
 
 [![Build Status](https://travis-ci.org/ripple/ripple-rest.svg?branch=develop)](https://travis-ci.org/ripple/ripple-rest)
 [![Coverage Status](https://img.shields.io/coveralls/ripple/ripple-rest.svg)](https://coveralls.io/r/ripple/ripple-rest?branch=develop)
