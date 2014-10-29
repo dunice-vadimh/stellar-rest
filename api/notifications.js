@@ -52,7 +52,7 @@ function getNotification(request, response, next) {
     }
 
     respond.success(response, responseBody);
-  });
+  }, next);
 }
 
 /**
@@ -67,12 +67,13 @@ function getNotification(request, response, next) {
  *  @param {Hex-encoded String|ResourceId} req.params.identifier
  *  @param {Express.js Response} res
  *  @param {Function} callback
+ *  @param {Express.js Next} next
  *
  *  @callback
  *  @param {Error} error
  *  @param {Notification} notification
  */
-function getNotificationHelper(request, response, callback) {
+function getNotificationHelper(request, response, callback, next) {
   var account = request.params.account;
   var identifier = request.params.identifier
 
