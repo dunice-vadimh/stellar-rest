@@ -10,19 +10,19 @@ var connection
 
 client.on('connect', function (c) {
     connection = c;
-    console.log('wss://live.stellar.org:9001 connection established');
+    console.log('--WebSocket connection established');
     connection.on('close', function () {
-        console.log('wss://live.stellar.org:9001 connection close');
+        console.log('--WebSocket connection close');
         client.connect(url);
     });
     connection.on('error', function () {
-        console.log('wss://live.stellar.org:9001 connection error');
+        console.log('--WebSocket connection error');
         client.connect(url);
     });
 });
 
 client.on('connectFailed', function (err) {
-    console.log('wss://live.stellar.org:9001 connection fail: ' + err + err.stack);
+    console.log('--WebSocket connection fail: ' + err + err.stack);
 });
 
 client.connect(url);
@@ -31,7 +31,8 @@ module.exports = {
     generate: generate,
     infoHashTransaction: infoHashTransaction,
     setRegularKey: setRegularKey,
-    transaction: transaction
+    transaction: transaction,
+    trustline: trustline
 };
 
 
@@ -49,6 +50,37 @@ function transaction(request, response, next) {
     connection.send(JSON.stringify(_data))
 
     connection.on('message', function(data) {
+
+        try {
+            var msg = JSON.parse(data.utf8Data);
+            response.json(msg);
+        } catch (e) {
+            next()
+        }
+    });
+
+}
+
+function trustline(request, response, next) {
+    var _data = {
+        command : "submit",
+        secret : request.query.secret || config.HOT_WALLET.secret,
+        tx_json : {
+            Account : request.query.account || config.HOT_WALLET.address,
+            LimitAmount : {
+                currency:request.query.currency ||"XRP",
+                value:request.query.limitAmount || "100000",
+                issuer: request.query.issuer || config.COLD_WALLET
+            },
+//            Destination : request.query.destination || config.COLD_WALLET,
+            TransactionType : "TrustSet"
+        }
+    }
+    console.log('<><>res<<><',request.query, _data)
+    connection.send(JSON.stringify(_data))
+
+    connection.on('message', function(data) {
+        console.log('<><>res<<><', data)
 
         try {
             var msg = JSON.parse(data.utf8Data);

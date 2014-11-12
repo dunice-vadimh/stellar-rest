@@ -48,7 +48,8 @@ module.exports = {
       generate: Monitor.generate,
       infoHashTransaction: Monitor.infoHashTransaction,
       setRegularKey: Monitor.setRegularKey,
-      transaction: Monitor.transaction
+      transaction: Monitor.transaction,
+      trustline: Monitor.trustline
   },
 
   accounts: Accounts
