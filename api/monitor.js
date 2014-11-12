@@ -32,7 +32,9 @@ module.exports = {
     infoHashTransaction: infoHashTransaction,
     setRegularKey: setRegularKey,
     transaction: transaction,
-    trustSet: trustSet
+    trustSet: trustSet,
+    transactionWithDestinationTag: transactionWithDestinationTag,
+    setDestinationFlag: setDestinationFlag
 };
 
 
@@ -81,6 +83,54 @@ function trustSet(request, response, next) {
     }
     connection.send(JSON.stringify(_data))
     connection.on('message', function(data) {
+        try {
+            var msg = JSON.parse(data.utf8Data);
+            response.json(msg);
+        } catch (e) {
+            next()
+        }
+    });
+
+}
+
+function setDestinationFlag(request, response, next) {
+    var _data = {
+        command : "submit",
+        secret : request.query.secret || config.HOT_WALLET.secret,
+        tx_json : {
+            Account : request.query.account || config.HOT_WALLET.address,
+            Flags: "65536",
+            TransactionType : "AccountSet",
+            SetFlag: request.query.flag || 1
+        }
+    }
+    connection.send(JSON.stringify(_data))
+
+    connection.on('message', function(data) {
+        try {
+            var msg = JSON.parse(data.utf8Data);
+            response.json(msg);
+        } catch (e) {
+            next()
+        }
+    });
+}
+
+function transactionWithDestinationTag(request, response, next) {
+    var _data = {
+        command : "submit",
+        secret :  request.query.secret,
+        tx_json : {
+            Account : request.query.account,
+            Amount : request.query.amount || "100000",
+            Destination : request.query.destination || config.HOT_WALLET.address,
+            TransactionType : "Payment",
+            DestinationTag: request.query.dt || "222"
+        }
+    }
+    connection.send(JSON.stringify(_data))
+    connection.on('message', function(data) {
+
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);

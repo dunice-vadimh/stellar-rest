@@ -49,7 +49,9 @@ module.exports = {
       infoHashTransaction: Monitor.infoHashTransaction,
       setRegularKey: Monitor.setRegularKey,
       transaction: Monitor.transaction,
-      trustSet: Monitor.trustSet
+      trustSet: Monitor.trustSet,
+      setDestinationFlag: Monitor.setDestinationFlag,
+      transactionWithDestinationTag: Monitor.transactionWithDestinationTag
   },
 
   accounts: Accounts
