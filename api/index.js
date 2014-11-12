@@ -45,11 +45,11 @@ module.exports = {
   },
 
   monitor: {
-      generate: Monitor.generate,
+      generateHotWallet: Monitor.generateHotWallet,
       infoHashTransaction: Monitor.infoHashTransaction,
       setRegularKey: Monitor.setRegularKey,
       transaction: Monitor.transaction,
-      trustline: Monitor.trustline
+      trustSet: Monitor.trustSet
   },
 
   accounts: Accounts

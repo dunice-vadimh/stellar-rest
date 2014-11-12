@@ -28,11 +28,11 @@ client.on('connectFailed', function (err) {
 client.connect(url);
 
 module.exports = {
-    generate: generate,
+    generateHotWallet: generateHotWallet,
     infoHashTransaction: infoHashTransaction,
     setRegularKey: setRegularKey,
     transaction: transaction,
-    trustline: trustline
+    trustSet: trustSet
 };
 
 
@@ -42,7 +42,11 @@ function transaction(request, response, next) {
         secret : request.query.secret || config.HOT_WALLET.secret,
         tx_json : {
             Account : request.query.account || config.HOT_WALLET.address,
-            Amount : request.query.amount || "100000",
+            Amount : {
+                currency:request.query.currency ||"XRP",
+                value:request.query.value || "100000",
+                issuer: request.query.issuer || config.COLD_WALLET
+            },
             Destination : request.query.destination || config.COLD_WALLET,
             TransactionType : "Payment"
         }
@@ -61,7 +65,7 @@ function transaction(request, response, next) {
 
 }
 
-function trustline(request, response, next) {
+function trustSet(request, response, next) {
     var _data = {
         command : "submit",
         secret : request.query.secret || config.HOT_WALLET.secret,
@@ -72,16 +76,11 @@ function trustline(request, response, next) {
                 value:request.query.limitAmount || "100000",
                 issuer: request.query.issuer || config.COLD_WALLET
             },
-//            Destination : request.query.destination || config.COLD_WALLET,
             TransactionType : "TrustSet"
         }
     }
-    console.log('<><>res<<><',request.query, _data)
     connection.send(JSON.stringify(_data))
-
     connection.on('message', function(data) {
-        console.log('<><>res<<><', data)
-
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);
@@ -142,6 +141,22 @@ function infoHashTransaction(request, response, next) {
     });
 }
 
+
+function generateHotWallet(request, response, next) {
+
+    var _data = { command : "create_keys" }
+    connection.send(JSON.stringify(_data))
+    connection.on('message', function(data) {
+        try {
+            var msg = JSON.parse(data.utf8Data);
+            response.json(msg);
+        } catch (e) {
+            next()
+        }
+    });
+
+}
+
 function setRegularKey(request, response, next) {
 
     var _data = { command : "SetRegularKey" }
@@ -156,18 +171,6 @@ function setRegularKey(request, response, next) {
     });
 }
 
-function generate(request, response, next) {
-
-    var _data = { command : "create_keys" }
-    connection.send(JSON.stringify(_data))
-    connection.on('message', function(data) {
-        try {
-            var msg = JSON.parse(data.utf8Data);
-            response.json(msg);
-        } catch (e) {
-            next()
-        }
-    });
     // server info
 //    remote.request_server_info(function(err, res) {
 //        if (err) {
@@ -197,5 +200,3 @@ function generate(request, response, next) {
 //        // handle ledger_data
 //        // see https://www.stellar.org/api/#api-subscribe for the format of ledger_data
 //    }
-
-}
