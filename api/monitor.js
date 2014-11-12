@@ -1,23 +1,31 @@
-const WebSocket = require('ws');
+const WebSocket = require('websocket').client;
 const errors  = require('./../lib/errors.js');
 const respond = require('./../lib/response-handler.js');
 const remote  = require('./../lib/remote.js');
 const config  = require('./../../gatewayd/config/config.json');
 
 var url = 'wss://live.stellar.org:9001';
-var ws = new WebSocket(url);
+var client = new WebSocket();
+var connection
 
-ws.on('open', function() {
-    console.log('---ws open');
+client.on('connect', function (c) {
+    connection = c;
+    console.log('wss://live.stellar.org:9001 connection established');
+    connection.on('close', function () {
+        console.log('wss://live.stellar.org:9001 connection close');
+        client.connect(url);
+    });
+    connection.on('error', function () {
+        console.log('wss://live.stellar.org:9001 connection error');
+        client.connect(url);
+    });
 });
-ws.on('close', function () {
-    console.log('---ws connection close');
-    ws = new WebSocket(url);
+
+client.on('connectFailed', function (err) {
+    console.log('wss://live.stellar.org:9001 connection fail: ' + err + err.stack);
 });
-ws.on('error', function () {
-    console.log('---ws connection error');
-    ws = new WebSocket(url);
-});
+
+client.connect(url);
 
 module.exports = {
     generate: generate,
@@ -38,11 +46,12 @@ function transaction(request, response, next) {
             TransactionType : "Payment"
         }
     }
-    ws.send(JSON.stringify(_data))
-    ws.on('message', function(data, flags) {
+    connection.send(JSON.stringify(_data))
+
+    connection.on('message', function(data) {
 
         try {
-            var msg = JSON.parse(data);
+            var msg = JSON.parse(data.utf8Data);
             response.json(msg);
         } catch (e) {
             next()
@@ -71,11 +80,10 @@ function transaction(request, response, next) {
 //            }
 //        }
 //    }
-//    ws.send(JSON.stringify(_data))
-//    ws.on('message', function(data, flags) {
-//        console.log('---123', data, flags);
+//    connection.send(JSON.stringify(_data))
+//    connection.on('message', function(data) {
 //        try {
-//            var msg = JSON.parse(data);
+//            var msg = JSON.parse(data.utf8Data);
 //            response.json(msg);
 //        } catch (e) {
 //            next()
@@ -90,10 +98,10 @@ function infoHashTransaction(request, response, next) {
         command : "tx",
         transaction: request.query.hash || config.LAST_PAYMENT_HASH
     }
-    ws.send(JSON.stringify(_data))
-    ws.on('message', function(data, flags) {
+    connection.sendUTF(JSON.stringify(_data))
+    connection.on('message', function(data) {
         try {
-            var msg = JSON.parse(data);
+            var msg = JSON.parse(data.utf8Data);
             response.json(msg);
         } catch (e) {
             next()
@@ -105,11 +113,10 @@ function infoHashTransaction(request, response, next) {
 function setRegularKey(request, response, next) {
 
     var _data = { command : "SetRegularKey" }
-    ws.send(JSON.stringify(_data))
-    ws.on('message', function(data, flags) {
-        console.log('---123', data, flags);
+    connection.send(JSON.stringify(_data))
+    connection.on('message', function(data) {
         try {
-            var msg = JSON.parse(data);
+            var msg = JSON.parse(data.utf8Data);
             response.json(msg);
         } catch (e) {
             next()
@@ -120,10 +127,10 @@ function setRegularKey(request, response, next) {
 function generate(request, response, next) {
 
     var _data = { command : "create_keys" }
-    ws.send(JSON.stringify(_data))
-    ws.on('message', function(data, flags) {
+    connection.send(JSON.stringify(_data))
+    connection.on('message', function(data) {
         try {
-            var msg = JSON.parse(data);
+            var msg = JSON.parse(data.utf8Data);
             response.json(msg);
         } catch (e) {
             next()
