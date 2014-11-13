@@ -51,6 +51,8 @@ module.exports = {
       transaction: Monitor.transaction,
       trustSet: Monitor.trustSet,
       setDestinationFlag: Monitor.setDestinationFlag,
+      accountLines: Monitor.accountLines,
+      subscribe: Monitor.subscribe,
       transactionWithDestinationTag: Monitor.transactionWithDestinationTag
   },
 

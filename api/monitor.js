@@ -34,7 +34,9 @@ module.exports = {
     transaction: transaction,
     trustSet: trustSet,
     transactionWithDestinationTag: transactionWithDestinationTag,
-    setDestinationFlag: setDestinationFlag
+    accountLines: accountLines,
+    setDestinationFlag: setDestinationFlag,
+    subscribe: subscribe
 };
 
 
@@ -122,7 +124,11 @@ function transactionWithDestinationTag(request, response, next) {
         secret :  request.query.secret,
         tx_json : {
             Account : request.query.account,
-            Amount : request.query.amount || "100000",
+            Amount : {
+                currency:request.query.currency ||"XRP",
+                value:request.query.value || "100000",
+                issuer: request.query.issuer || config.COLD_WALLET
+            },
             Destination : request.query.destination || config.HOT_WALLET.address,
             TransactionType : "Payment",
             DestinationTag: request.query.dt || "222"
@@ -195,6 +201,45 @@ function infoHashTransaction(request, response, next) {
 function generateHotWallet(request, response, next) {
 
     var _data = { command : "create_keys" }
+    connection.send(JSON.stringify(_data))
+    connection.on('message', function(data) {
+        try {
+            var msg = JSON.parse(data.utf8Data);
+            response.json(msg);
+        } catch (e) {
+            next()
+        }
+    });
+
+}
+function subscribe(request, response, next) {
+
+    var _data = {
+        command : "subscribe",
+        accounts : [ config.COLD_WALLET ]
+    }
+    connection.send(JSON.stringify(_data))
+    connection.on('message', function(data) {
+        console.log('<><><><><><><><><><')
+        console.log(data.utf8Data)
+        console.log('<><><><><><><><><><')
+        try {
+            var msg = JSON.parse(data.utf8Data);
+            response.json(msg);
+        } catch (e) {
+            next()
+        }
+    });
+
+}
+
+function accountLines(request, response, next) {
+
+    var _data = {
+        command: "account_lines",
+//        id: 24,
+        account: request.query.account || config.COLD_WALLET
+    }
     connection.send(JSON.stringify(_data))
     connection.on('message', function(data) {
         try {
