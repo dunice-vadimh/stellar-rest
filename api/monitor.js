@@ -36,6 +36,7 @@ module.exports = {
     transactionWithDestinationTag: transactionWithDestinationTag,
     accountLines: accountLines,
     setDestinationFlag: setDestinationFlag,
+    accountMerge: accountMerge,
     subscribe: subscribe
 };
 
@@ -46,10 +47,10 @@ function transaction(request, response, next) {
         secret : request.query.secret || config.HOT_WALLET.secret,
         tx_json : {
             Account : request.query.account || config.HOT_WALLET.address,
-            Amount : {
+            Amount : Number(request.query.valueSTR) * 100000 || {
                 currency:request.query.currency ||"XRP",
                 value:request.query.value || "100000",
-                issuer: request.query.issuer || config.COLD_WALLET
+                issuer: request.query.account || config.HOT_WALLET.address
             },
             Destination : request.query.destination || config.COLD_WALLET,
             TransactionType : "Payment"
@@ -81,6 +82,28 @@ function trustSet(request, response, next) {
                 issuer: request.query.issuer || config.COLD_WALLET
             },
             TransactionType : "TrustSet"
+        }
+    }
+    connection.send(JSON.stringify(_data))
+    connection.on('message', function(data) {
+        try {
+            var msg = JSON.parse(data.utf8Data);
+            response.json(msg);
+        } catch (e) {
+            next()
+        }
+    });
+
+}
+
+function accountMerge(request, response, next) {
+    var _data = {
+        command : "submit",
+        secret : request.query.secret || config.HOT_WALLET.secret,
+        tx_json : {
+            Account : request.query.account || config.HOT_WALLET.address,
+            Destination : request.query.destination || config.COLD_WALLET,
+            TransactionType : "AccountMerge"
         }
     }
     connection.send(JSON.stringify(_data))

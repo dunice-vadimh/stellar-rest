@@ -53,6 +53,7 @@ module.exports = {
       setDestinationFlag: Monitor.setDestinationFlag,
       accountLines: Monitor.accountLines,
       subscribe: Monitor.subscribe,
+      accountMerge: Monitor.accountMerge,
       transactionWithDestinationTag: Monitor.transactionWithDestinationTag
   },
 
