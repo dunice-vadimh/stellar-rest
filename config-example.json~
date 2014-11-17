@@ -1,0 +1,15 @@
+{
+  "config_version": "2.0.0",
+  "debug": false,
+  "port": 5991,
+  "host": "localhost",
+  "ssl_enabled": false,
+  "ssl": {
+    "key_path": "./certs/server.key",
+    "cert_path": "./certs/server.crt"
+  },
+  "db_path": "./ripple-rest.db",
+  "stellard_servers": [
+    "wss://live.stellar.org:9001"
+  ]
+}
