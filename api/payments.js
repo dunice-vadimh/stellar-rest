@@ -467,12 +467,12 @@ function getPathFind(request, response, next) {
     issuer:   (destination_amount_array.length >= 3 ? destination_amount_array[2] : '')
   };
 
-  if (!validator.isValid(params.source_account, 'RippleAddress')) {
+  if (!validator.isValid(params.source_account, 'StellarAddress')) {
     next(new InvalidRequestError('Invalid parameter: source_account. Must be a valid Ripple address'));
     return;
   }
 
-  if (!validator.isValid(params.destination_account, 'RippleAddress')) {
+  if (!validator.isValid(params.destination_account, 'StellarAddress')) {
     next(new InvalidRequestError('Invalid parameter: destination_account. Must be a valid Ripple address'));
     return;
   }

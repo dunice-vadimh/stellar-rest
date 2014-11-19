@@ -76,8 +76,8 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'ripple_path_find',
-        source_account: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh',
-        destination_account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
+        source_account: 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1',
+        destination_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
         destination_amount: '429000000'
       });
 
@@ -88,6 +88,7 @@ describe('payments', function() {
 
     app.get('/v1/accounts/'+fixtures.accounts.genesis.address+'/payments/paths/'+fixtures.accounts.alice.address+'/429+XRP')
       .end(function(err, resp) {
+       console.log('4444444', resp.body)
         assert.strictEqual(resp.body.success, true);
         var keyresp = testutils.hasKeys(resp.body, ['payments','success']);
         assert.equal(keyresp.hasAllKeys,true);
@@ -109,7 +110,7 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data,{
         command: 'subscribe',
-        accounts: [ 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh' ]
+        accounts: [ 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1' ]
       });
 
       orderlist.mark('subscribe');
@@ -119,8 +120,8 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'account_info',
-        ident: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh',
-        account: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh'
+        ident: 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1',
+        account: 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1'
       });
 
       orderlist.mark('account_info');
@@ -139,8 +140,8 @@ describe('payments', function() {
         Amount: '429000000',
         Fee: '12',
         SigningPubKey: '0330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD020',
-        Account: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh',
-        Destination: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U'
+        Account: 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1',
+        Destination: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
       });
 
       orderlist.mark('submit');
@@ -183,8 +184,8 @@ describe('payments', function() {
         delete data.id;
         assert.deepEqual(data, {
           command: 'account_info',
-          ident: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
-          account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U'
+          ident: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+          account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
         });
         orderlist.mark('account_info');
     };
@@ -193,8 +194,8 @@ describe('payments', function() {
         delete data.id;
         assert.deepEqual(data, {
           command: 'account_lines',
-          ident: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
-          account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U'
+          ident: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+          account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
         });
         orderlist.mark('account_lines');
     };
@@ -225,8 +226,8 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'ripple_path_find',
-        source_account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
-        destination_account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
+        source_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+        destination_account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
         destination_amount: '1'
       });
     };
@@ -236,8 +237,8 @@ describe('payments', function() {
         delete data.id
         assert.deepEqual(data, {
           command: 'account_info',
-          ident: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
-          account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U'
+          ident: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+          account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
         });
     };
 
@@ -277,7 +278,7 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'subscribe',
-        accounts: [ 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U' ]
+        accounts: [ 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf' ]
       });
     };
 
@@ -286,8 +287,8 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'account_info',
-        ident: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
-        account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U'
+        ident: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+        account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
       });
     };
 
@@ -298,9 +299,9 @@ describe('payments', function() {
       assert.deepEqual(so, {
         Flags: 0,
         TransactionType: 'Payment',
-        Account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
+        Account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
         Amount: '1',
-        Destination: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
+        Destination: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
         LastLedgerSequence: 8804622,
         Sequence: 1,
         SigningPubKey: '022E3308DCB75B17BEF734CE342AC40FF7FDF55E3FEA3593EE8301A70C532BB5BB',
@@ -363,8 +364,8 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'ripple_path_find',
-        source_account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
-        destination_account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
+        source_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+        destination_account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
         destination_amount: (store.reserve_base_xrp*1000000).toString()
       });
     };
@@ -374,8 +375,8 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'account_info',
-        ident: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
-        account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U'
+        ident: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+        account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
       })
     };
 
@@ -417,8 +418,8 @@ describe('payments', function() {
         Amount: (store.reserve_base_xrp*1000000).toString(),
         Fee: '12',
         SigningPubKey: '022E3308DCB75B17BEF734CE342AC40FF7FDF55E3FEA3593EE8301A70C532BB5BB',
-        Account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
-        Destination: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5'
+        Account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+        Destination: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY'
       });
     };
 
@@ -458,11 +459,11 @@ describe('payments', function() {
       assert.equal(resp.body.success,true);
       var payment = resp.body.payment;
       var statusPayment = {
-        source_account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
+        source_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
         source_tag: '',
         source_amount: { value: '200', currency: 'XRP', issuer: '' },
         source_slippage: '0',
-        destination_account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
+        destination_account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
         destination_tag: '',
         destination_amount: { value: '200', currency: 'XRP', issuer: '' },
         invoice_id: '',
@@ -508,11 +509,11 @@ describe('payments', function() {
         assert.equal(resp.body.success,true);
         var payment = resp.body.payment;
         var statusPayment = {
-          source_account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
+          source_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
           source_tag: '',
           source_amount: { value: '200', currency: 'XRP', issuer: '' },
           source_slippage: '0',
-          destination_account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
+          destination_account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
           destination_tag: '',
           destination_amount: { value: '200', currency: 'XRP', issuer: '' },
           invoice_id: '',
@@ -552,8 +553,8 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'account_info',
-        ident: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
-        account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5'
+        ident: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
+        account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY'
       });
       orderlist.mark('account_info');
     };
@@ -562,8 +563,8 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'account_lines',
-        ident: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
-        account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5'
+        ident: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
+        account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY'
       });
       orderlist.mark('account_lines');
     };
@@ -595,8 +596,8 @@ describe('payments', function() {
       orderlist.mark('ripple_path_find');
       delete data.id;
       assert.deepEqual(data,{ command: 'ripple_path_find',
-        source_account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
-        destination_account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
+        source_account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
+        destination_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
         destination_amount: '200000000'
       });
     };
@@ -606,8 +607,8 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'account_info',
-        ident: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
-        account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5'
+        ident: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
+        account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY'
       });
     };
 
@@ -658,12 +659,12 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data,{
         command: 'ripple_path_find',
-        source_account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
-        destination_account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
+        source_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+        destination_account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
         destination_amount: {
           value: '10',
           currency: 'USD',
-          issuer: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U'
+          issuer: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
         }
       });
     };
@@ -696,7 +697,7 @@ describe('payments', function() {
       delete data.id;
       assert.deepEqual(data, {
         command: 'subscribe',
-        accounts: [ 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5' ]
+        accounts: [ 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY' ]
       });
     };
 
@@ -705,8 +706,8 @@ describe('payments', function() {
       orderlist.mark('account_info');
       assert.deepEqual(data, {
         command: 'account_info',
-        ident: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
-        account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5'
+        ident: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
+        account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY'
       });
     };
 
@@ -717,11 +718,11 @@ describe('payments', function() {
       assert.deepEqual(so, {
         Flags: 2147483648,
         TransactionType: 'TrustSet',
-        Account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
+        Account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
         LimitAmount: {
           value: '10',
           currency: 'USD',
-          issuer: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U'
+          issuer: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
         },
         Sequence: 1,
         SigningPubKey: '03BC02F6C0F2C50EF5DB02C2C17062B7449B34FBD669A75362E41348C9FAE3DDE1',
@@ -750,10 +751,10 @@ describe('payments', function() {
       assert.deepEqual(resp.body,{
         "success": true,
         "trustline": {
-          "account": "rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5",
+          "account": "ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY",
           "limit": "10",
           "currency": "USD",
-          "counterparty": "rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U",
+          "counterparty": "g941TxKXrhqgricDCpXpYBHdhK5StUWCPf",
           "account_allows_rippling": true,
           "account_froze_trustline": false
         }
@@ -774,12 +775,12 @@ describe('payments', function() {
     var _ripple_path_find = function (data,ws) {
     delete data.id;
       assert.deepEqual(data, { command: 'ripple_path_find',
-        source_account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
-        destination_account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
+        source_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+        destination_account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
         destination_amount: {
           value: '10',
           currency: 'USD',
-          issuer: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U'
+          issuer: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
         }
       });
       orderlist.mark('ripple_path_find');
@@ -793,16 +794,16 @@ describe('payments', function() {
           success: true,
           payments: [
             {
-              source_account: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U',
+              source_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
               source_tag: '',
               source_amount: { value: '10', currency: 'USD', issuer: '' },
               source_slippage: '0',
-              destination_account: 'rwmityd4Ss34DBUsRy7Pacv6UA5n7yjfe5',
+              destination_account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
               destination_tag: '',
               destination_amount: {
                 value: '10',
                 currency: 'USD',
-                issuer: 'rJRLoJSErtNRFnbCyHEUYnRUKNwkVYDM7U'
+                issuer: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
               },
               invoice_id: '',
               paths: '[]',
@@ -919,7 +920,7 @@ describe('payments', function() {
       .end(function(err,resp) {
         assert.deepEqual(resp.body, { success: true,
           client_resource_id: 'qwerty',
-          status_url: 'http://127.0.0.1:5990/v1/accounts/rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh/payments/qwerty' })
+          status_url: 'http://127.0.0.1:5990/v1/accounts/gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1/payments/qwerty' })
         done()
       })
   });
@@ -942,14 +943,14 @@ describe('payments', function() {
 
   it('post a non-xrp payment without issuer',function(done) {
     app.post('/v1/payments')
-      .send({ secret: 'snoPBrXtMeMyMHUVTgbuqAfg1SUTb',
+      .send({ secret: 's3TC7Hk4D5dVNyFtnZRz2e2nBnxYPQN2vw13Yo4xtdeWSQ2q369',
         client_resource_id : '123456',
         payment:
-        { source_account: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh',
+        { source_account: 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1',
           source_tag: '',
           source_amount: { value: '600', currency: 'USD', issuer: '' },
           source_slippage: '0',
-          destination_account: 'rsE6ZLDkXhSvfJHvSqFPhdazsoMgCEC52V',
+          destination_account: 'gGpgSmraWsYN7NipMgbJEjdsUxNidSQbgm',
           destination_tag: '',
           destination_amount: { value: '600', currency: 'USD', issuer: '' },
           invoice_id: '',
@@ -1042,10 +1043,10 @@ describe('payments', function() {
         assert.deepEqual(resp.body,{
           "success": true,
           "trustline": {
-            "account": "rsE6ZLDkXhSvfJHvSqFPhdazsoMgCEC52V",
+            "account": "gGpgSmraWsYN7NipMgbJEjdsUxNidSQbgm",
             "limit": "10",
             "currency": "USD",
-            "counterparty": "r3YHFNkQRJDPc9aCkRojPLwKVwok3ihgBJ",
+            "counterparty": "g9WfuWxLqDEH2xLLcY85yK9qF31WsLRjYj",
             "account_allows_rippling": true,
             "account_froze_trustline": false
           }
@@ -1072,10 +1073,10 @@ describe('payments', function() {
         assert.deepEqual(resp.body, {
           "success": true,
           "trustline": {
-            "account": "rsE6ZLDkXhSvfJHvSqFPhdazsoMgCEC52V",
+            "account": "gGpgSmraWsYN7NipMgbJEjdsUxNidSQbgm",
             "limit": "10",
             "currency": "USD",
-            "counterparty": "r3YHFNkQRJDPc9aCkRojPLwKVwok3ihgBJ",
+            "counterparty": "g9WfuWxLqDEH2xLLcY85yK9qF31WsLRjYj",
             "account_allows_rippling": true,
             "account_froze_trustline": false
           }
@@ -1134,7 +1135,7 @@ describe('payments', function() {
         assert.deepEqual(resp.body,{
           success: true,
           client_resource_id: 'abc',
-          status_url: 'http://127.0.0.1:5990/v1/accounts/r3YHFNkQRJDPc9aCkRojPLwKVwok3ihgBJ/payments/abc'
+          status_url: 'http://127.0.0.1:5990/v1/accounts/g9WfuWxLqDEH2xLLcY85yK9qF31WsLRjYj/payments/abc'
         });
 
       })
