@@ -97,7 +97,7 @@ module.exports.RESTAccountSettingsSubmitResponse = function(lastLedger) {
   return JSON.stringify({
     success: true,
     hash: 'AD922400CB1CE0876CA7203DBE0B1277D0D0EAC56A64F26CEC6C78D447EFEA5E',
-    ledger: lastLedger.toXRPing(),
+    ledger: lastLedger.toString(),
     settings: {
       require_destination_tag: true,
       require_authorization: true,

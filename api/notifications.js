@@ -76,6 +76,7 @@ function getNotification(request, response, next) {
 function getNotificationHelper(request, response, callback, next) {
   var account = request.params.account;
   var identifier = request.params.identifier
+    console.log('-----11111111111-->>>>>>>>>>>>>>>>', request.params)
 
   if (!account) {
     return next(new errors.InvalidRequestError('Missing parameter: account. Must be a valid Stellar Address'));
