@@ -243,9 +243,6 @@ function subscribe(request, response, next) {
     }
     connection.send(JSON.stringify(_data))
     connection.on('message', function(data) {
-        console.log('<><><><><><><><><><')
-        console.log(data.utf8Data)
-        console.log('<><><><><><><><><><')
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);

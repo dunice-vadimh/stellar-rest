@@ -56,7 +56,6 @@ function submitPayment(request, response, next) {
     client_resource_id: request.body.client_resource_id,
     url_base: request.protocol + '://' + request.hostname + (config && config.get('port') ? ':' + config.get('port') : '')
   };
-//    console.log('-----11111111111-->>>>>>>>>>>>>>>>', params)
 
   async.waterfall(steps, function(error, client_resource_id) {
     if (error) {
@@ -445,7 +444,6 @@ function getPathFind(request, response, next) {
     destination_amount: {},
     source_currencies: []
   };
-    console.log('wwwwwwwwwww', request.body, request.params)
 
   if (!params.source_account) {
     next(new InvalidRequestError('Missing parameter: source_account. Must be a valid Ripple address'));

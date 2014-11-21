@@ -11,7 +11,7 @@ var orderlist     = new testutils.orderlist;
 
 /**
  * Payment tests
- * This file, _payment-3test.js describes tests in a different format from other other tests
+ * This file, _payment-.js describes tests in a different format from other other tests
  *
  * If you consider making changes to a test in this file, consider moving the tests over
  * to payment-test.js and adopting the XRPucture we have for the other tests
@@ -88,7 +88,6 @@ describe('payments', function() {
 
     app.get('/v1/accounts/'+fixtures.accounts.genesis.address+'/payments/paths/'+fixtures.accounts.alice.address+'/429+XRP')
       .end(function(err, resp) {
-       console.log('4444444', resp.body)
         assert.strictEqual(resp.body.success, true);
         var keyresp = testutils.hasKeys(resp.body, ['payments','success']);
         assert.equal(keyresp.hasAllKeys,true);
@@ -249,7 +248,6 @@ describe('payments', function() {
     route.once('account_info', _account_info);
     app.get('/v1/accounts/'+fixtures.accounts.alice.address+'/payments/paths/'+fixtures.accounts.bob.address+'/0.000001+XRP')
       .end(function(err, resp) {
-            console.log('0000000000000', resp.body)
         assert.strictEqual(resp.body.success, true);
         var keyresp = testutils.hasKeys(resp.body, ['payments','success']);
         assert.equal(keyresp.hasAllKeys,true);
@@ -348,7 +346,6 @@ describe('payments', function() {
 
     app.get('/v1/server')
       .end(function(err, resp) {
-            console.log('pppppppppppppp', resp,err)
             store.reserve_base_XRP = resp.body.rippled_server_status.validated_ledger.reserve_base_XRP;
         assert.equal(orderlist.test(),true);
         orderlist.reset();
@@ -389,7 +386,6 @@ describe('payments', function() {
 
     app.get('/v1/accounts/'+fixtures.accounts.alice.address+'/payments/paths/'+fixtures.accounts.bob.address+'/'+store.reserve_base_XRP+'+XRP')
       .end(function(err, resp) {
-            console.log('<><><><><><><><><><><><>', err, resp)
             assert.strictEqual(resp.body.success, true);
 
         var keyresp = testutils.hasKeys(resp.body, ['payments','success']);
@@ -432,7 +428,6 @@ describe('payments', function() {
       //
       //this route must contain parameter: paymen
       //
-      console.log('------->>>>>>>>>>>>>>>>', store.paymentAliceToBob)
       app.post('/v1/payments')
       .send(store.paymentAliceToBob)
       .end(function(err,resp) {
