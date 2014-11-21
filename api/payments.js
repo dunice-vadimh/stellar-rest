@@ -56,6 +56,7 @@ function submitPayment(request, response, next) {
     client_resource_id: request.body.client_resource_id,
     url_base: request.protocol + '://' + request.hostname + (config && config.get('port') ? ':' + config.get('port') : '')
   };
+//    console.log('-----11111111111-->>>>>>>>>>>>>>>>', params)
 
   async.waterfall(steps, function(error, client_resource_id) {
     if (error) {
@@ -125,10 +126,10 @@ function submitPayment(request, response, next) {
  */
 function paymentIsValid(payment, callback) {
   // Ripple addresses
-  if (!validator.isValid(payment.source_account, 'RippleAddress')) {
+  if (!validator.isValid(payment.source_account, 'StellarAddress')) {
     return callback(new InvalidRequestError('Invalid parameter: source_account. Must be a valid Ripple address'));
   }
-  if (!validator.isValid(payment.destination_account, 'RippleAddress')) {
+  if (!validator.isValid(payment.destination_account, 'StellarAddress')) {
     return callback(new InvalidRequestError('Invalid parameter: destination_account. Must be a valid Ripple address'));
   }
   // Tags
@@ -252,7 +253,7 @@ function getPayment(request, response, next) {
     if (!options.account) {
       invalid = 'Missing parameter: account. Must provide account to get payment details';
     }
-    if (!validator.isValid(options.account, 'RippleAddress')) {
+    if (!validator.isValid(options.account, 'StellarAddress')) {
       invalid = 'Invalid parameter: account. Must be a valid Ripple address';
     }
     if (!options.identifier) {
@@ -444,6 +445,7 @@ function getPathFind(request, response, next) {
     destination_amount: {},
     source_currencies: []
   };
+    console.log('wwwwwwwwwww', request.body, request.params)
 
   if (!params.source_account) {
     next(new InvalidRequestError('Missing parameter: source_account. Must be a valid Ripple address'));

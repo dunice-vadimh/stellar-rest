@@ -17,7 +17,6 @@ function getBalances(request, response, next) {
     currency: request.query.currency,
     counterparty: request.query.counterparty
   };
-
   var currencyRE = new RegExp(options.currency ? ('^' + options.currency.toUpperCase() + '$') : /./);
   var balances = [];
 

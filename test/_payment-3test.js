@@ -11,12 +11,12 @@ var orderlist     = new testutils.orderlist;
 
 /**
  * Payment tests
- * This file, _payment-test.js describes tests in a different format from other other tests
+ * This file, _payment-3test.js describes tests in a different format from other other tests
  *
  * If you consider making changes to a test in this file, consider moving the tests over
- * to payment-test.js and adopting the structure we have for the other tests
+ * to payment-test.js and adopting the XRPucture we have for the other tests
  *
- * New tests should not be added in the structure laid out here, but in the structure we
+ * New tests should not be added in the XRPucture laid out here, but in the XRPucture we
  * use in the other test files.
  */
 
@@ -106,22 +106,25 @@ describe('payments', function() {
   });
 
   it('Posting XRP from genesis to alice',function(done) {
-    var _subscribe = function(data,ws) {
+      var _ripple_path_find = function(data,ws) {
       delete data.id;
-      assert.deepEqual(data,{
-        command: 'subscribe',
-        accounts: [ 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1' ]
+        assert.deepEqual(data,{
+        command: 'ripple_path_find',
+//        accounts: [ 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1' ]
+        streams:["ledger","server"]
       });
 
-      orderlist.mark('subscribe');
+      orderlist.mark('ripple_path_find');
     };
 
     var _accountinfo = function(data,ws) {
-      delete data.id;
-      assert.deepEqual(data, {
+        delete data.id;
+        assert.deepEqual(data, {
         command: 'account_info',
-        ident: 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1',
-        account: 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1'
+//        ident: 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1',
+//        account: 'gDTxidJjkmPw9TSrcz3mwrvdN5NpuKwMR1'
+        ident: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
+        account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf'
       });
 
       orderlist.mark('account_info');
@@ -132,7 +135,7 @@ describe('payments', function() {
       var so = new RL.SerializedObject(data.tx_blob).to_json();
 
       delete so.TxnSignature; // sigs won't match ever
-      assert.deepEqual(so, {
+        assert.deepEqual(so, {
         TransactionType: 'Payment',
         Flags: 0,
         Sequence: 1,
@@ -147,23 +150,22 @@ describe('payments', function() {
       orderlist.mark('submit');
      };
 
-
     orderlist.create([
-      {command:'subscribe'},
+      {command:'ripple_path_find'},
       {command:'account_info'},
       {command:'submit'}
     ]);
 
-    route.once('subscribe',_subscribe);
+    route.once('ripple_path_find',_ripple_path_find);
     route.once('account_info',_accountinfo);
     route.once('submit',_submit);
 
     // actually post a XRP payment of 429 from genesis to alice
-    app.post('/v1/payments')
+      app.post('/v1/payments')
       .send(store.paymentGenesisToAlice)
       .expect(function(resp) {
         assert.strictEqual(resp.body.success, true);
-        var keys = Object.keys(fixtures.nominal_xrp_post_response);
+        var keys = Object.keys(fixtures.nominal_XRP_post_response);
         assert.equal(testutils.hasKeys(resp.body, keys).hasAllKeys,true);
         assert.equal(orderlist.test(),true);
         orderlist.reset();
@@ -174,11 +176,6 @@ describe('payments', function() {
 
   it('check amount alice has',function(done) {
     // we check that alice has 429 XRP
-
-    orderlist.create([
-      {command:'account_info'},
-      {command:'account_lines'}
-    ]);
 
     var _account_info = function(data,ws) {
         delete data.id;
@@ -199,6 +196,12 @@ describe('payments', function() {
         });
         orderlist.mark('account_lines');
     };
+
+      orderlist.create([
+          {command:'account_info'},
+          {command:'account_info'},
+          {command:'account_lines'}
+      ]);
 
     route.once('account_info',_account_info);
     route.once('account_lines',_account_lines);
@@ -244,9 +247,9 @@ describe('payments', function() {
 
     route.once('ripple_path_find', _ripple_path_find);
     route.once('account_info', _account_info);
-
     app.get('/v1/accounts/'+fixtures.accounts.alice.address+'/payments/paths/'+fixtures.accounts.bob.address+'/0.000001+XRP')
       .end(function(err, resp) {
+            console.log('0000000000000', resp.body)
         assert.strictEqual(resp.body.success, true);
         var keyresp = testutils.hasKeys(resp.body, ['payments','success']);
         assert.equal(keyresp.hasAllKeys,true);
@@ -268,13 +271,13 @@ describe('payments', function() {
     // however this should fail since bob, who does not exist on the ledger,
     // is recieving a payment that is too small to be created on the ledger
     orderlist.create([
-      {command:'subscribe'},
+      {command:'ripple_path_find'},
       {command:'account_info'},
       {command:'submit'}
     ]);
 
-    var _subscribe = function(data,ws) {
-      orderlist.mark('subscribe');
+    var _ripple_path_find = function(data,ws) {
+      orderlist.mark('ripple_path_find');
       delete data.id;
       assert.deepEqual(data, {
         command: 'subscribe',
@@ -309,7 +312,7 @@ describe('payments', function() {
        });
     };
 
-    route.once('subscribe',_subscribe);
+    route.once('ripple_path_find',_ripple_path_find);
     route.once('account_info',_account_info);
     route.once('submit',_submit);
 
@@ -331,7 +334,7 @@ describe('payments', function() {
   });
 
 
-  it('discover the reserve_base_xrp', function(done) {
+  it('discover the reserve_base_XRP', function(done) {
     var _server_info = function(data,ws) {
       orderlist.mark('server_info');
       delete data.id;
@@ -345,7 +348,8 @@ describe('payments', function() {
 
     app.get('/v1/server')
       .end(function(err, resp) {
-        store.reserve_base_xrp = resp.body.rippled_server_status.validated_ledger.reserve_base_xrp;
+            console.log('pppppppppppppp', resp,err)
+            store.reserve_base_XRP = resp.body.rippled_server_status.validated_ledger.reserve_base_XRP;
         assert.equal(orderlist.test(),true);
         orderlist.reset();
         done();
@@ -353,7 +357,7 @@ describe('payments', function() {
   });
 
   it('Pathfinding: from alice to bob XRP',function(done) {
-    // Now alice gives bob exactly the reserve_base_xrp XRP
+    // Now alice gives bob exactly the reserve_base_XRP XRP
     orderlist.create([
       {command:'ripple_path_find'},
       {command:'account_info'}
@@ -366,7 +370,7 @@ describe('payments', function() {
         command: 'ripple_path_find',
         source_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
         destination_account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
-        destination_amount: (store.reserve_base_xrp*1000000).toString()
+        destination_amount: (store.reserve_base_XRP*1000000).toXRPing()
       });
     };
 
@@ -383,9 +387,10 @@ describe('payments', function() {
     route.once('ripple_path_find',_ripple_path_find);
     route.once('account_info',_account_info);
 
-    app.get('/v1/accounts/'+fixtures.accounts.alice.address+'/payments/paths/'+fixtures.accounts.bob.address+'/'+store.reserve_base_xrp+'+XRP')
+    app.get('/v1/accounts/'+fixtures.accounts.alice.address+'/payments/paths/'+fixtures.accounts.bob.address+'/'+store.reserve_base_XRP+'+XRP')
       .end(function(err, resp) {
-        assert.strictEqual(resp.body.success, true);
+            console.log('<><><><><><><><><><><><>', err, resp)
+            assert.strictEqual(resp.body.success, true);
 
         var keyresp = testutils.hasKeys(resp.body, ['payments','success']);
         assert.equal(keyresp.hasAllKeys,true);
@@ -402,8 +407,8 @@ describe('payments', function() {
       });
   });
 
-  it('send bob reserve_base_xrp XRP from Alice to bob', function(done) {
-    // sending bob reserve_base_xrp XRP from alice
+  it('send bob reserve_base_XRP XRP from Alice to bob', function(done) {
+    // sending bob reserve_base_XRP XRP from alice
     orderlist.create([{command:'submit'}])
 
     var _submit = function(data,ws) {
@@ -415,7 +420,7 @@ describe('payments', function() {
         Flags: 0,
         Sequence: 2,
         LastLedgerSequence: 8804622,
-        Amount: (store.reserve_base_xrp*1000000).toString(),
+        Amount: (store.reserve_base_XRP*1000000).toXRPing(),
         Fee: '12',
         SigningPubKey: '022E3308DCB75B17BEF734CE342AC40FF7FDF55E3FEA3593EE8301A70C532BB5BB',
         Account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
@@ -424,7 +429,11 @@ describe('payments', function() {
     };
 
     route.once('submit',_submit);
-    app.post('/v1/payments')
+      //
+      //this route must contain parameter: paymen
+      //
+      console.log('------->>>>>>>>>>>>>>>>', store.paymentAliceToBob)
+      app.post('/v1/payments')
       .send(store.paymentAliceToBob)
       .end(function(err,resp) {
         assert.deepEqual(resp.body, {
@@ -441,7 +450,7 @@ describe('payments', function() {
 
 
   // confirm payment via client resource ID
-  it('check status url of the reserve_base_xrp transfer from alice to bob', function(done) {
+  it('check status url of the reserve_base_XRP transfer from alice to bob', function(done) {
 
     orderlist.create([{command:'tx'}])
     var _tx = function(data,ws) {
@@ -452,10 +461,10 @@ describe('payments', function() {
     };
 
     route.once('tx',_tx);
-
+      store.status_url = '/v1/accounts/'+fixtures.accounts.alice.address+'/payments/foobar26';
     app.get(store.status_url)
       .end(function(err, resp) {
-      assert.equal(resp.status,200);
+            assert.equal(resp.status,200);
       assert.equal(resp.body.success,true);
       var payment = resp.body.payment;
       var statusPayment = {
@@ -575,7 +584,7 @@ describe('payments', function() {
     app.get('/v1/accounts/'+fixtures.accounts.bob.address+'/balances')
       .end(function(err, resp) {
         var balance = resp.body.balances[0];
-        // change all instances of 200 with reserve base xrp
+        // change all instances of 200 with reserve base XRP
         assert.equal(balance.value,'200');
         store.bob_balance = balance.value;
         assert.equal(orderlist.test(),true);
@@ -831,7 +840,7 @@ describe('payments', function() {
         assert.deepEqual(resp.body,{ success: false,
           error_type: 'invalid_request',
           error: 'Invalid parameter: destination_amount',
-          message: 'Must be an amount string in the form value+currency+issuer' })
+          message: 'Must be an amount XRPing in the form value+currency+issuer' })
         done()
       })
   });
@@ -843,7 +852,7 @@ describe('payments', function() {
         assert.deepEqual(resp.body,{ success: false,
           error_type: 'invalid_request',
           error: 'Invalid parameter: destination_amount',
-          message: 'Must be an amount string in the form value+currency+issuer' })
+          message: 'Must be an amount XRPing in the form value+currency+issuer' })
         done()
       })
   });
@@ -941,7 +950,7 @@ describe('payments', function() {
       .end(done);
   });
 
-  it('post a non-xrp payment without issuer',function(done) {
+  it('post a non-XRP payment without issuer',function(done) {
     app.post('/v1/payments')
       .send({ secret: 's3TC7Hk4D5dVNyFtnZRz2e2nBnxYPQN2vw13Yo4xtdeWSQ2q369',
         client_resource_id : '123456',

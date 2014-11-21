@@ -90,7 +90,7 @@ describe('post settings', function() {
       assert.strictEqual(typeof so.Sequence, 'number');
       assert.strictEqual(so.LastLedgerSequence, lastLedger + LEDGER_OFFSET);
       assert.strictEqual(so.Fee, '12');
-      assert.strictEqual(so.Account, 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE');
+      assert.strictEqual(so.Account, 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP');
 
       conn.send(fixtures.submitSettingsResponse(message, lastLedger + LEDGER_OFFSET));
     });
@@ -103,7 +103,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: true,
         require_authorization: true,
-        disallow_xrp: true,
+        disallow_XRP: true,
         domain: 'example.com',
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -132,7 +132,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: true,
         require_authorization: true,
-        disallow_xrp: true,
+        disallow_XRP: true,
         domain: 'example.com',
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -181,7 +181,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: true,
         require_authorization: true,
-        disallow_xrp: true,
+        disallow_XRP: true,
         domain: 'example.com',
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -210,7 +210,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: 1,
         require_authorization: true,
-        disallow_xrp: true,
+        disallow_XRP: true,
         domain: 'example.com',
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -239,7 +239,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: true,
         require_authorization: true,
-        disallow_xrp: true,
+        disallow_XRP: true,
         domain: 1,
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -268,7 +268,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: true,
         require_authorization: true,
-        disallow_xrp: true,
+        disallow_XRP: true,
         domain: 'example.com',
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -299,7 +299,7 @@ describe('post settings', function() {
       assert.strictEqual(typeof so.Sequence, 'number');
       assert.strictEqual(so.LastLedgerSequence, self.app.remote._ledger_current_index + LEDGER_OFFSET);
       assert.strictEqual(so.Fee, '12');
-      assert.strictEqual(so.Account, 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE');
+      assert.strictEqual(so.Account, 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP');
 
       conn.send(fixtures.submitSettingsResponse(message));
     });
@@ -335,7 +335,7 @@ describe('post settings', function() {
       assert.strictEqual(so.LastLedgerSequence, self.app.remote._ledger_current_index + LEDGER_OFFSET);
       assert.strictEqual(so.Domain, '');
       assert.strictEqual(so.Fee, '12');
-      assert.strictEqual(so.Account, 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE');
+      assert.strictEqual(so.Account, 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP');
 
       conn.send(fixtures.submitSettingsResponse(message));
     });
@@ -371,7 +371,7 @@ describe('post settings', function() {
       assert.strictEqual(so.EmailHash, new Array(32 + 1).join('0'));
       assert.strictEqual(so.LastLedgerSequence, self.app.remote._ledger_current_index + LEDGER_OFFSET);
       assert.strictEqual(so.Fee, '12');
-      assert.strictEqual(so.Account, 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE');
+      assert.strictEqual(so.Account, 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP');
 
       conn.send(fixtures.submitSettingsResponse(message));
     });
@@ -407,7 +407,7 @@ describe('post settings', function() {
       assert.strictEqual(so.WalletLocator, new Array(64 + 1).join('0'));
       assert.strictEqual(so.LastLedgerSequence, self.app.remote._ledger_current_index + LEDGER_OFFSET);
       assert.strictEqual(so.Fee, '12');
-      assert.strictEqual(so.Account, 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE');
+      assert.strictEqual(so.Account, 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP');
 
       conn.send(fixtures.submitSettingsResponse(message));
     });
@@ -443,7 +443,7 @@ describe('post settings', function() {
       assert.strictEqual(so.TransferRate, 0);
       assert.strictEqual(so.LastLedgerSequence, self.app.remote._ledger_current_index + LEDGER_OFFSET);
       assert.strictEqual(so.Fee, '12');
-      assert.strictEqual(so.Account, 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE');
+      assert.strictEqual(so.Account, 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP');
 
       conn.send(fixtures.submitSettingsResponse(message));
     });

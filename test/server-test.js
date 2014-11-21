@@ -73,7 +73,7 @@ describe('get server info', function() {
     });
 
     var closeTime = new Date();
-    closeTime.setSeconds(closeTime.getSeconds() - 60);
+    closeTime.setSeconds(closeTime.getSeconds() - 0);
     remote.getServer()._lastLedgerClose = closeTime.getTime();
 
     self.app

@@ -111,7 +111,7 @@ var subscribe = function(data,ws) {
 exports.subscribe = subscribe;
 var response = function(data,ws) {
     if (data.accounts) {
-        ws.send(JSON.stringify({ 
+        ws.send(JSON.stringify({
         id: data.id, result: {}, status: 'success', type: 'response' 
         }))
     }
@@ -138,10 +138,10 @@ var server_info = function(data,ws) {
       "server_state": "syncing",
       "validated_ledger": {
         "age": 6,
-        "base_fee_xrp": 0.00001,
+        "base_fee_XRP": 0.00001,
         "hash": "8AA5B0329BB5A67CD53A5A31700F40D9AA44423DC4ACD598EB3BCBC6D425565D",
-        "reserve_base_xrp": 20,
-        "reserve_inc_xrp": 5,
+        "reserve_base_XRP": 20,
+        "reserve_inc_XRP": 5,
         "seq": 8803979
       },
       "validation_quorum": 3
@@ -237,7 +237,7 @@ var account_info = function(data,ws) {
             ))
         break;
         case accounts.alice.address :
-            ws.send(JSON.stringify({ 
+            ws.send(JSON.stringify({
                 id: data.id,
                 result: 
                 { account_data: 
@@ -345,7 +345,7 @@ exports.clearInterval = function() {
 //    clearInterval(timerid)
 }
 
-exports.nominal_xrp_post_response = {
+exports.nominal_XRP_post_response = {
   "success": true,
   "client_resource_id": "f2f811b7-dc3b-4078-a2c2-e4ca9e453981",
   "status_url": ".../v1/accounts/r1.../payments/f2f811b7-dc3b-4078-a2c2-e4ca9e453981"

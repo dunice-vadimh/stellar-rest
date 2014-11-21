@@ -308,7 +308,7 @@
 			"data": [],
 			"dataMode": "params",
 			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar data = JSON.parse(responseBody);\ntests[\"name\"] = typeof data.name === 'string';\ntests[\"documentation\"] = typeof data.documentation === 'string';\ntests[\"endpoints\"] = typeof data.endpoints === 'object';",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar data = JSON.parse(responseBody);\ntests[\"name\"] = typeof data.name === 'XRPing';\ntests[\"documentation\"] = typeof data.documentation === 'XRPing';\ntests[\"endpoints\"] = typeof data.endpoints === 'object';",
 			"time": 1410224291807,
 			"name": "/v1",
 			"description": "",
@@ -326,7 +326,7 @@
 			"data": [],
 			"dataMode": "params",
 			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar data = JSON.parse(responseBody);\ntests[\"success property\"] = data.success === true;\ntests[\"uuid\"] = typeof data.uuid === 'string';",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar data = JSON.parse(responseBody);\ntests[\"success property\"] = data.success === true;\ntests[\"uuid\"] = typeof data.uuid === 'XRPing';",
 			"time": 1410218313909,
 			"name": "/uuid",
 			"description": "",
@@ -351,7 +351,7 @@
 			"collectionId": "83d23725-411a-9e62-6a10-44dab7bdb4d4",
 			"responses": [],
 			"synced": false,
-			"rawModeData": "{\n  \"secret\": \"{YOUR SECRET}\",\n  \"settings\": {\n    \"transfer_rate\": 100,\n    \"password_spent\": false,\n    \"require_destination_tag\": false,\n    \"require_authorization\": false,\n    \"disallow_xrp\": false,\n    \"disable_master\": false\n  }\n}"
+			"rawModeData": "{\n  \"secret\": \"{YOUR SECRET}\",\n  \"settings\": {\n    \"transfer_rate\": 100,\n    \"password_spent\": false,\n    \"require_destination_tag\": false,\n    \"require_authorization\": false,\n    \"disallow_XRP\": false,\n    \"disable_master\": false\n  }\n}"
 		}
 	]
 }

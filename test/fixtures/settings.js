@@ -9,7 +9,7 @@ module.exports.accountInfoResponse = function(request) {
     type: 'response',
     result: {
       account_data: {
-        Account: 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE',
+        Account: 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP',
         Balance: '922913243',
         Domain: '6578616D706C652E636F6D',
         EmailHash: '23463B99B62A72F26ED677CC556C44E8',
@@ -34,13 +34,13 @@ module.exports.accountNotFoundResponse = function(request) {
     id: request.id,
     status: 'error',
     type: 'response',
-    account: 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE',
+    account: 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP',
     error: 'actNotFound',
     error_code: 15,
     error_message: 'Account not found.',
     ledger_current_index: 8941468,
     request: {
-      account: 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE',
+      account: 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP',
       command: 'account_info',
       id: request.id
     },
@@ -59,7 +59,7 @@ module.exports.submitSettingsResponse = function(request, lastLedger) {
       engine_result_message: 'The transaction was applied.',
       tx_blob: request.tx_blob,
       tx_json: {
-        Account: 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE',
+        Account: 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP',
         Fee: '12',
         Flags: 2147549184,
         LastLedgerSequence: lastLedger,
@@ -76,12 +76,12 @@ module.exports.submitSettingsResponse = function(request, lastLedger) {
 module.exports.RESTAccountSettingsResponse = JSON.stringify({
   success: true,
   settings: {
-    account: 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE',
+    account: 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP',
     transfer_rate: 1002000000,
     password_spent: false,
     require_destination_tag: true,
     require_authorization: false,
-    disallow_xrp: true,
+    disallow_XRP: true,
     disable_master: false,
     transaction_sequence: '2938',
     email_hash: '23463B99B62A72F26ED677CC556C44E8',
@@ -97,11 +97,11 @@ module.exports.RESTAccountSettingsSubmitResponse = function(lastLedger) {
   return JSON.stringify({
     success: true,
     hash: 'AD922400CB1CE0876CA7203DBE0B1277D0D0EAC56A64F26CEC6C78D447EFEA5E',
-    ledger: lastLedger.toString(),
+    ledger: lastLedger.toXRPing(),
     settings: {
       require_destination_tag: true,
       require_authorization: true,
-      disallow_xrp: true,
+      disallow_XRP: true,
       email_hash: '23463B99B62A72F26ED677CC556C44E8',
       wallet_locator: 'DEADBEEF',
       wallet_size: 1,
@@ -132,7 +132,7 @@ module.exports.RESTInvalidDestTagResponse = JSON.stringify({
 module.exports.RESTInvalidDomainResponse = JSON.stringify({
   success: false,
   error_type: 'invalid_request',
-  error: 'Parameter must be a string: domain'
+  error: 'Parameter must be a XRPing: domain'
 });
 
 module.exports.RESTInvalidTransferRateResponse = JSON.stringify({

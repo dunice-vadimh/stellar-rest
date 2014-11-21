@@ -18,13 +18,13 @@ module.exports.transactionResponse = function(request) {
     status: 'success',
     type: 'response',
     result: {
-      Account: 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE',
+      Account: 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP',
       Amount: {
         currency: 'USD',
-        issuer: 'r3PDtZSa5LiYp1Ysn1vMuMzB59RzV3W9QH',
+        issuer: 'gfqsdCGV5Bq558KPStURKsxWfd4VUGfAwF',
         value: '0.001'
       },
-      Destination: 'r3PDtZSa5LiYp1Ysn1vMuMzB59RzV3W9QH',
+      Destination: 'gfqsdCGV5Bq558KPStURKsxWfd4VUGfAwF',
       Fee: '10',
       Flags: 0,
       Paths: [
@@ -96,7 +96,7 @@ module.exports.transactionResponse = function(request) {
               Flags: 131072,
               HighLimit: {
                 currency: 'USD',
-                issuer: 'r3PDtZSa5LiYp1Ysn1vMuMzB59RzV3W9QH',
+                issuer: 'gfqsdCGV5Bq558KPStURKsxWfd4VUGfAwF',
                 value: '1'
               },
               HighNode: '0000000000000000',
@@ -123,7 +123,7 @@ module.exports.transactionResponse = function(request) {
         {
           ModifiedNode: {
             FinalFields: {
-              Account: 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE',
+              Account: 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP',
               Balance: '9998898762',
               Flags: 0,
               OwnerCount: 3,
@@ -315,7 +315,7 @@ module.exports.ledgerResponse = function(request) {
 module.exports.RESTTransactionResponse = JSON.stringify({
   success: true,
   payment: {
-    source_account: 'r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE',
+    source_account: 'gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP',
     source_tag: '',
     source_amount: {
       value: '1.112209',
@@ -323,11 +323,11 @@ module.exports.RESTTransactionResponse = JSON.stringify({
       issuer: ''
     },
     source_slippage: '0',
-    destination_account: 'r3PDtZSa5LiYp1Ysn1vMuMzB59RzV3W9QH',
+    destination_account: 'gfqsdCGV5Bq558KPStURKsxWfd4VUGfAwF',
     destination_tag: '',
     destination_amount: {
       currency: 'USD',
-      issuer: 'r3PDtZSa5LiYp1Ysn1vMuMzB59RzV3W9QH',
+      issuer: 'gfqsdCGV5Bq558KPStURKsxWfd4VUGfAwF',
       value: '0.001'
     },
     invoice_id: '',
@@ -450,7 +450,7 @@ module.exports.paymentWithMemo = {
   }
 };
 
-module.exports.nonXrpPaymentWithoutIssuer = {
+module.exports.nonXRPPaymentWithoutIssuer = {
   secret: addresses.SECRET,
   client_resource_id: "1",
   payment: {
@@ -463,7 +463,7 @@ module.exports.nonXrpPaymentWithoutIssuer = {
   }
 };
 
-module.exports.nonXrpPaymentWithIssuer = {
+module.exports.nonXRPPaymentWithIssuer = {
   secret: addresses.SECRET,
   client_resource_id: "1",
   payment: {
@@ -540,7 +540,7 @@ module.exports.RESTPaymentWithMemoResponse = JSON.stringify(
   }
 );
 
-module.exports.RESTResponseMissingMemoData = JSON.stringify(
+module.exports.REXRPesponseMissingMemoData = JSON.stringify(
   {
     "success":true,
     "client_resource_id":"1",
@@ -548,25 +548,25 @@ module.exports.RESTResponseMissingMemoData = JSON.stringify(
   }
 );
 
-module.exports.RESTResponseMemoTypeInt = JSON.stringify(
+module.exports.REXRPesponseMemoTypeInt = JSON.stringify(
   {
     "success":false,
     "error_type":"invalid_request",
     "error":"Invalid parameter: MemoType",
-    "message":"MemoType must be a string"
+    "message":"MemoType must be a XRPing"
   }
 );
 
-module.exports.RESTResponseMemoDataInt = JSON.stringify(
+module.exports.REXRPesponseMemoDataInt = JSON.stringify(
   {
     "success":false,
     "error_type":"invalid_request",
     "error":"Invalid parameter: MemoData",
-    "message":"MemoData must be a string"
+    "message":"MemoData must be a XRPing"
   }
 );
 
-module.exports.RESTResponseEmptyMemosArray = JSON.stringify(
+module.exports.REXRPesponseEmptyMemosArray = JSON.stringify(
   {
     "success":false,
     "error_type":"invalid_request",
@@ -575,7 +575,7 @@ module.exports.RESTResponseEmptyMemosArray = JSON.stringify(
   }
 );
 
-module.exports.RESTResponseNonArrayMemo = JSON.stringify(
+module.exports.REXRPesponseNonArrayMemo = JSON.stringify(
   {
     "success":false,
     "error_type":"invalid_request",
@@ -584,7 +584,7 @@ module.exports.RESTResponseNonArrayMemo = JSON.stringify(
   }
 );
 
-module.exports.RESTNonXrpPaymentWithoutIssuer = JSON.stringify(
+module.exports.RESTNonXRPPaymentWithoutIssuer = JSON.stringify(
   {
     "success": false,
     "error_type": "invalid_request",
@@ -593,10 +593,10 @@ module.exports.RESTNonXrpPaymentWithoutIssuer = JSON.stringify(
   }
 );
 
-module.exports.RESTNonXrpPaymentWithIssuer = JSON.stringify(
+module.exports.RESTNonXRPPaymentWithIssuer = JSON.stringify(
   {
     "success": true,
     "client_resource_id": "1",
-    "status_url": "http://127.0.0.1:5990/v1/accounts/r3GgMwvgvP8h4yVWvjH1dPZNvC37TjzBBE/payments/1"
+    "status_url": "http://127.0.0.1:5990/v1/accounts/gNkEonGvwXUFyYz5qr27RBgPs5NrzxpBwP/payments/1"
   }
 );

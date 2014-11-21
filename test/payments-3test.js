@@ -97,14 +97,14 @@ describe('post payments', function() {
     })
 
     var body = _.cloneDeep(fixtures.paymentWithMemo);
-    body.payment.memos = "some string";
+    body.payment.memos = "some XRPing";
 
     self.app
       .post('/v1/payments')
       .send(body)
       .expect(testutils.checkStatus(400))
       .expect(testutils.checkHeaders)
-      .expect(testutils.checkBody(fixtures.RESTResponseNonArrayMemo))
+      .expect(testutils.checkBody(fixtures.REXRPesponseNonArrayMemo))
       .end(done);
   });
 
@@ -129,7 +129,7 @@ describe('post payments', function() {
       .send(body)
       .expect(testutils.checkStatus(400))
       .expect(testutils.checkHeaders)
-      .expect(testutils.checkBody(fixtures.RESTResponseEmptyMemosArray))
+      .expect(testutils.checkBody(fixtures.REXRPesponseEmptyMemosArray))
       .end(done);
   });
 
@@ -154,7 +154,7 @@ describe('post payments', function() {
       .send(body)
       .expect(testutils.checkStatus(400))
       .expect(testutils.checkHeaders)
-      .expect(testutils.checkBody(fixtures.RESTResponseMemoTypeInt))
+      .expect(testutils.checkBody(fixtures.REXRPesponseMemoTypeInt))
       .end(done);
   });
 
@@ -179,7 +179,7 @@ describe('post payments', function() {
       .send(body)
       .expect(testutils.checkStatus(400))
       .expect(testutils.checkHeaders)
-      .expect(testutils.checkBody(fixtures.RESTResponseMemoDataInt))
+      .expect(testutils.checkBody(fixtures.REXRPesponseMemoDataInt))
       .end(done);
   });
 
@@ -204,7 +204,7 @@ describe('post payments', function() {
       .send(body)
       .expect(testutils.checkStatus(200))
       .expect(testutils.checkHeaders)
-      .expect(testutils.checkBody(fixtures.RESTResponseMissingMemoData))
+      .expect(testutils.checkBody(fixtures.REXRPesponseMissingMemoData))
       .end(done);
   });
 
@@ -245,10 +245,10 @@ describe('post payments', function() {
 
     self.app
       .post('/v1/payments')
-      .send(fixtures.nonXrpPaymentWithIssuer)
+      .send(fixtures.nonXRPPaymentWithIssuer)
       .expect(testutils.checkStatus(200))
       .expect(testutils.checkHeaders)
-      .expect(testutils.checkBody(fixtures.RESTNonXrpPaymentWithIssuer))
+      .expect(testutils.checkBody(fixtures.RESTNonXRPPaymentWithIssuer))
       .end(done);
   });
 
@@ -264,10 +264,10 @@ describe('post payments', function() {
 
     self.app
       .post('/v1/payments')
-      .send(fixtures.nonXrpPaymentWithoutIssuer)
+      .send(fixtures.nonXRPPaymentWithoutIssuer)
       .expect(testutils.checkStatus(400))
       .expect(testutils.checkHeaders)
-      .expect(testutils.checkBody(fixtures.RESTNonXrpPaymentWithoutIssuer))
+      .expect(testutils.checkBody(fixtures.RESTNonXRPPaymentWithoutIssuer))
       .end(done);
   });
 

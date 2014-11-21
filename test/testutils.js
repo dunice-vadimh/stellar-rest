@@ -19,7 +19,7 @@ function setup(done) {
 
   self.wss.once('connection', function(conn) {
     conn.on('message', function(message) {
-      //console.log('<<', message);
+//      console.log('<<', message);
       message = JSON.parse(message);
       self.wss.emit('request_' + message.command, message, conn);
     });
@@ -79,6 +79,7 @@ module.exports.checkBody = checkBody;
 
 function checkBody(expected) {
   return function(res, err) {
+//      console.log('JSON.stringify(res.body), expected', res.body, JSON.parse(expected), err)
     assert.ifError(err);
     assert.strictEqual(JSON.stringify(res.body), expected);
   };

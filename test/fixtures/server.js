@@ -17,10 +17,10 @@ module.exports.serverInfoResponse = function(request) {
         server_state: 'full',
         validated_ledger: {
           age: 5,
-          base_fee_xrp: 0.00001,
+          base_fee_XRP: 0.00001,
           hash: '4482DEE5362332F54A4036ED57EE1767C9F33CF7CE5A6670355C16CECE381D46',
-          reserve_base_xrp: 20,
-          reserve_inc_xrp: 5,
+          reserve_base_XRP: 20,
+          reserve_inc_XRP: 5,
           seq: 6595042
         },
         validation_quorum: 3
@@ -44,10 +44,10 @@ module.exports.RESTServerInfoResponse = JSON.stringify({
     server_state: 'full',
     validated_ledger: {
       age: 5,
-      base_fee_xrp: 0.00001,
+      base_fee_XRP: 0.00001,
       hash: '4482DEE5362332F54A4036ED57EE1767C9F33CF7CE5A6670355C16CECE381D46',
-      reserve_base_xrp: 20,
-      reserve_inc_xrp: 5,
+      reserve_base_XRP: 20,
+      reserve_inc_XRP: 5,
       seq: 6595042 },
       validation_quorum: 3
   }
@@ -77,5 +77,16 @@ module.exports.RESTServerIndexResponse = JSON.stringify({
     server_status: "/v1/server",
     server_connected: "/v1/server/connected",
     uuid_generator: "/v1/uuid"
-  }
+  },
+    socket_points: {
+        generate_HotWallet: '/v1/monitor/generateHotWallet',
+        info_HashTransaction: '/v1/monitor/infoHashTransaction?hash={hash}',
+        transaction: '/v1/monitor/transaction?account={your account}&secret={your secret}&currency={currency}&value={value}&destination={destination address}',
+        setDestinationFlag: '/v1/monitor/setDestinationFlag?account={your account}&secret={your secret}',
+        trustSet: '/v1/monitor/trustSet?account={your account}&secret={your secret}&currency={currency}&limitAmount={value}&issuer={destination address}',
+        accountLines: '/v1/monitor/accountLines?account={your account}',
+        accountMerge: '/v1/monitor/accountMerge?account={your account}&secret={your secret}&destination={destination address}',
+        subscribe: '/v1/monitor/subscribe',
+        transaction_With_DestinationTag: '/v1/monitor/transactionWithDestinationTag?account={your account}&secret={your secret}&currency={currency}&value={value}&destination={destination address}&dt={DestinationTag}'
+    }
 });
