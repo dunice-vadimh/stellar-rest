@@ -97,7 +97,7 @@ describe('post payments', function() {
 //    })
 //
 //    var body = _.cloneDeep(fixtures.paymentWithMemo);
-//    body.payment.memos = "some XRPing";
+//    body.payment.memos = "some string";
 //
 //    self.app
 //      .post('/v1/payments')

@@ -370,7 +370,7 @@ describe('payments', function() {
         command: 'ripple_path_find',
         source_account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
         destination_account: 'ghmt4X48tYa5aGSwGcjyAJdfPhiNnyoxYY',
-        destination_amount: (store.reserve_base_XRP*1000000).toXRPing()
+        destination_amount: (store.reserve_base_XRP*1000000).toString()
       });
     };
 
@@ -420,7 +420,7 @@ describe('payments', function() {
         Flags: 0,
         Sequence: 2,
         LastLedgerSequence: 8804622,
-        Amount: (store.reserve_base_XRP*1000000).toXRPing(),
+        Amount: (store.reserve_base_XRP*1000000).toString(),
         Fee: '12',
         SigningPubKey: '022E3308DCB75B17BEF734CE342AC40FF7FDF55E3FEA3593EE8301A70C532BB5BB',
         Account: 'g941TxKXrhqgricDCpXpYBHdhK5StUWCPf',
@@ -840,7 +840,7 @@ describe('payments', function() {
         assert.deepEqual(resp.body,{ success: false,
           error_type: 'invalid_request',
           error: 'Invalid parameter: destination_amount',
-          message: 'Must be an amount XRPing in the form value+currency+issuer' })
+          message: 'Must be an amount string in the form value+currency+issuer' })
         done()
       })
   });
@@ -852,7 +852,7 @@ describe('payments', function() {
         assert.deepEqual(resp.body,{ success: false,
           error_type: 'invalid_request',
           error: 'Invalid parameter: destination_amount',
-          message: 'Must be an amount XRPing in the form value+currency+issuer' })
+          message: 'Must be an amount string in the form value+currency+issuer' })
         done()
       })
   });

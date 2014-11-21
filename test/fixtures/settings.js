@@ -81,7 +81,7 @@ module.exports.RESTAccountSettingsResponse = JSON.stringify({
     password_spent: false,
     require_destination_tag: true,
     require_authorization: false,
-    disallow_XRP: true,
+    disallow_xrp: true,
     disable_master: false,
     transaction_sequence: '2938',
     email_hash: '23463B99B62A72F26ED677CC556C44E8',
@@ -101,7 +101,7 @@ module.exports.RESTAccountSettingsSubmitResponse = function(lastLedger) {
     settings: {
       require_destination_tag: true,
       require_authorization: true,
-      disallow_XRP: true,
+      disallow_xrp: true,
       email_hash: '23463B99B62A72F26ED677CC556C44E8',
       wallet_locator: 'DEADBEEF',
       wallet_size: 1,
@@ -132,7 +132,7 @@ module.exports.RESTInvalidDestTagResponse = JSON.stringify({
 module.exports.RESTInvalidDomainResponse = JSON.stringify({
   success: false,
   error_type: 'invalid_request',
-  error: 'Parameter must be a XRPing: domain'
+  error: 'Parameter must be a string: domain'
 });
 
 module.exports.RESTInvalidTransferRateResponse = JSON.stringify({

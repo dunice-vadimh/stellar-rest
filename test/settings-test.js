@@ -86,7 +86,7 @@ describe('post settings', function() {
       var so = new ripple.SerializedObject(message.tx_blob).to_json();
 
       assert.strictEqual(so.TransactionType, 'AccountSet');
-      assert.strictEqual(so.Flags, 2147811328);
+      assert.strictEqual(so.Flags, 2148859904);
       assert.strictEqual(typeof so.Sequence, 'number');
 //      assert.strictEqual(so.LastLedgerSequence, lastLedger + LEDGER_OFFSET);
       assert.strictEqual(so.Fee, '12');
@@ -103,7 +103,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: true,
         require_authorization: true,
-        disallow_XRP: true,
+        disallow_xrp: true,
         domain: 'example.com',
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -132,7 +132,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: true,
         require_authorization: true,
-        disallow_XRP: true,
+        disallow_xrp: true,
         domain: 'example.com',
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -181,7 +181,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: true,
         require_authorization: true,
-        disallow_XRP: true,
+        disallow_xrp: true,
         domain: 'example.com',
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -210,7 +210,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: 1,
         require_authorization: true,
-        disallow_XRP: true,
+        disallow_xrp: true,
         domain: 'example.com',
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -239,7 +239,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: true,
         require_authorization: true,
-        disallow_XRP: true,
+        disallow_xrp: true,
         domain: 1,
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',
@@ -268,7 +268,7 @@ describe('post settings', function() {
       settings: {
         require_destination_tag: true,
         require_authorization: true,
-        disallow_XRP: true,
+        disallow_xrp: true,
         domain: 'example.com',
         email_hash: '23463B99B62A72F26ED677CC556C44E8',
         wallet_locator: 'DEADBEEF',

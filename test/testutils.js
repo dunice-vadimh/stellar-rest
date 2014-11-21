@@ -79,7 +79,6 @@ module.exports.checkBody = checkBody;
 
 function checkBody(expected) {
   return function(res, err) {
-      console.log('JSON.stringify(res.body), expected', res.body, JSON.parse(expected), err)
     assert.ifError(err);
     assert.strictEqual(JSON.stringify(res.body), expected);
   };

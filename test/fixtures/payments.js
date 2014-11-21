@@ -553,7 +553,7 @@ module.exports.REXRPesponseMemoTypeInt = JSON.stringify(
     "success":false,
     "error_type":"invalid_request",
     "error":"Invalid parameter: MemoType",
-    "message":"MemoType must be a XRPing"
+    "message":"MemoType must be a string"
   }
 );
 
@@ -562,7 +562,7 @@ module.exports.REXRPesponseMemoDataInt = JSON.stringify(
     "success":false,
     "error_type":"invalid_request",
     "error":"Invalid parameter: MemoData",
-    "message":"MemoData must be a XRPing"
+    "message":"MemoData must be a string"
   }
 );
 
