@@ -28,6 +28,7 @@ client.on('connectFailed', function (err) {
 client.connect(url);
 
 module.exports = {
+    generateMonitorPage: generateMonitorPage(),
     generateHotWallet: generateHotWallet,
     infoHashTransaction: infoHashTransaction,
     setRegularKey: setRegularKey,
@@ -40,6 +41,25 @@ module.exports = {
     subscribe: subscribe
 };
 
+function generateMonitorPage(request, response, next) {
+
+    return {
+        success: true,
+        name: 'stellar-rest',
+        documentation: 'https://github.com/umbrellab/stellar-rest',
+
+        socket_points:
+        {
+            send_STR : 'http://128.199.236.97/:5991/v1/monitor/transaction?account=[public_address_sender]&destination=[public_address_getter]&secret=[secret_sender]&valueSTR=[valueSTR]',
+            send_BTC :
+            {
+                trust: 'http://128.199.236.97/:5991/v1/monitor/trustSet?account=[public_address_getter]&secret=[secret_getter]&issuer=[public_address_sender]&currency=[currency]&limitAmount=[limitAmount]',
+                trunsaction: 'http://128.199.236.97/:5991/v1/monitor/transaction?account=[public_address_sender]&secret=[secret_getter]&destination=[public_address_getter]&value=[amount]&currency=[currency]&dt=[destination_tag]'
+            }
+
+        }
+    };
+}
 
 function transaction(request, response, next) {
     var _data = {
@@ -63,6 +83,7 @@ function transaction(request, response, next) {
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);
+            response.send(data.utf8Data);
         } catch (e) {
             next()
         }
@@ -89,6 +110,7 @@ function trustSet(request, response, next) {
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);
+            response.send(data.utf8Data);
         } catch (e) {
             next()
         }
@@ -135,6 +157,7 @@ function setDestinationFlag(request, response, next) {
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);
+            response.send(data.utf8Data);
         } catch (e) {
             next()
         }
@@ -213,6 +236,7 @@ function infoHashTransaction(request, response, next) {
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);
+            response.send(data.utf8Data);
         } catch (e) {
             next()
         }
@@ -229,6 +253,7 @@ function generateHotWallet(request, response, next) {
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);
+            response.send(data.utf8Data);
         } catch (e) {
             next()
         }

@@ -45,6 +45,7 @@ module.exports = {
   },
 
   monitor: {
+      generateMonitorPage: Monitor.generateMonitorPage,
       generateHotWallet: Monitor.generateHotWallet,
       infoHashTransaction: Monitor.infoHashTransaction,
       setRegularKey: Monitor.setRegularKey,
