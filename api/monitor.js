@@ -3,6 +3,7 @@ const errors  = require('./../lib/errors.js');
 const respond = require('./../lib/response-handler.js');
 const remote  = require('./../lib/remote.js');
 const config  = require('./../../gatewayd/config/config.json');
+var request = require('request');
 
 var url = 'wss://live.stellar.org:9001';
 var client = new WebSocket();
@@ -19,6 +20,7 @@ client.on('connect', function (c) {
         console.log('--WebSocket connection error');
         client.connect(url);
     });
+
 });
 
 client.on('connectFailed', function (err) {
@@ -28,7 +30,6 @@ client.on('connectFailed', function (err) {
 client.connect(url);
 
 module.exports = {
-    generateMonitorPage: generateMonitorPage(),
     generateHotWallet: generateHotWallet,
     infoHashTransaction: infoHashTransaction,
     setRegularKey: setRegularKey,
@@ -41,25 +42,6 @@ module.exports = {
     subscribe: subscribe
 };
 
-function generateMonitorPage(request, response, next) {
-
-    return {
-        success: true,
-        name: 'stellar-rest',
-        documentation: 'https://github.com/umbrellab/stellar-rest',
-
-        socket_points:
-        {
-            send_STR : 'http://128.199.236.97/:5991/v1/monitor/transaction?account=[public_address_sender]&destination=[public_address_getter]&secret=[secret_sender]&valueSTR=[valueSTR]',
-            send_BTC :
-            {
-                trust: 'http://128.199.236.97/:5991/v1/monitor/trustSet?account=[public_address_getter]&secret=[secret_getter]&issuer=[public_address_sender]&currency=[currency]&limitAmount=[limitAmount]',
-                trunsaction: 'http://128.199.236.97/:5991/v1/monitor/transaction?account=[public_address_sender]&secret=[secret_getter]&destination=[public_address_getter]&value=[amount]&currency=[currency]&dt=[destination_tag]'
-            }
-
-        }
-    };
-}
 
 function transaction(request, response, next) {
     var _data = {
@@ -177,7 +159,7 @@ function transactionWithDestinationTag(request, response, next) {
             },
             Destination : request.query.destination || config.HOT_WALLET.address,
             TransactionType : "Payment",
-            DestinationTag: request.query.dt || "222"
+            DestinationTag: request.query.dt
         }
     }
     connection.send(JSON.stringify(_data))
@@ -186,44 +168,13 @@ function transactionWithDestinationTag(request, response, next) {
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);
+            response.send(data.utf8Data);
         } catch (e) {
             next()
         }
     });
 
 }
-
-//function offerTransaction(request, response, next) {
-//
-//    var _data = {
-//        command: "submit",
-//        secret: "s3q5ZGX2ScQK2rJ4JATp7rND6X5npG3De8jMbB7tuvm2HAVHcCN",
-//        tx_json: {
-//            TransactionType: "OfferCreate",
-//            Account: "ganVp9o5emfzpwrG5QVUXqMv8AgLcdvySb",
-//            TakerGets: {
-//                currency: "USD",
-//                value: "1500",
-//                issuer: "ghj4kXtHfQcCaLQwpLJ11q2hq6248R7k9C"
-//            },
-//            TakerPays: {
-//                currency: "BTC",
-//                value: "2.5",
-//                issuer: "ghj4kXtHfQcCaLQwpLJ11q2hq6248R7k9C"
-//            }
-//        }
-//    }
-//    connection.send(JSON.stringify(_data))
-//    connection.on('message', function(data) {
-//        try {
-//            var msg = JSON.parse(data.utf8Data);
-//            response.json(msg);
-//        } catch (e) {
-//            next()
-//        }
-//
-//    });
-//}
 
 function infoHashTransaction(request, response, next) {
 
@@ -261,16 +212,16 @@ function generateHotWallet(request, response, next) {
 
 }
 function subscribe(request, response, next) {
-
     var _data = {
         command : "subscribe",
-        accounts : [ config.COLD_WALLET ]
+        accounts : [ request.query.accounts ]
     }
     connection.send(JSON.stringify(_data))
     connection.on('message', function(data) {
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);
+            response.send(data.utf8Data);
         } catch (e) {
             next()
         }
@@ -278,11 +229,11 @@ function subscribe(request, response, next) {
 
 }
 
+
 function accountLines(request, response, next) {
 
     var _data = {
         command: "account_lines",
-//        id: 24,
         account: request.query.account || config.COLD_WALLET
     }
     connection.send(JSON.stringify(_data))
@@ -290,6 +241,7 @@ function accountLines(request, response, next) {
         try {
             var msg = JSON.parse(data.utf8Data);
             response.json(msg);
+            response.send(data.utf8Data);
         } catch (e) {
             next()
         }
@@ -310,6 +262,41 @@ function setRegularKey(request, response, next) {
         }
     });
 }
+
+
+
+
+//function offerTransaction(request, response, next) {
+//
+//    var _data = {
+//        command: "submit",
+//        secret: "s3q5ZGX2ScQK2rJ4JATp7rND6X5npG3De8jMbB7tuvm2HAVHcCN",
+//        tx_json: {
+//            TransactionType: "OfferCreate",
+//            Account: "ganVp9o5emfzpwrG5QVUXqMv8AgLcdvySb",
+//            TakerGets: {
+//                currency: "USD",
+//                value: "1500",
+//                issuer: "ghj4kXtHfQcCaLQwpLJ11q2hq6248R7k9C"
+//            },
+//            TakerPays: {
+//                currency: "BTC",
+//                value: "2.5",
+//                issuer: "ghj4kXtHfQcCaLQwpLJ11q2hq6248R7k9C"
+//            }
+//        }
+//    }
+//    connection.send(JSON.stringify(_data))
+//    connection.on('message', function(data) {
+//        try {
+//            var msg = JSON.parse(data.utf8Data);
+//            response.json(msg);
+//        } catch (e) {
+//            next()
+//        }
+//
+//    });
+//}
 
     // server info
 //    remote.request_server_info(function(err, res) {
